@@ -1,3 +1,19 @@
+### MODIFICATION ###
+import ctypes
+import threading
+import time
+
+lib = ctypes.CDLL('/home/xilinx/jupyter_notebooks/qick/qick_demos/custom/drivers/libgpio_control.so')
+control_event = threading.Event()
+
+def trigger_start_pulse():
+    while not control_event.is_set():  
+        time.sleep(0.001) 
+        lib.initialize_gpio()
+        lib.toggle_gpio()
+        lib.cleanup_gpio()
+### MODIFICATION ###
+    
 """
 The interface for writing QICK programs.
 This contains tools for managing the board configuration and the base class for QICK programs.
@@ -1082,7 +1098,7 @@ class AbsQickProgram(ABC):
         soc.start_src(start_src)
         # run the assembly program
         # if start_src="external", it won't actually start until it sees a pulse
-        soc.start_tproc()
+        soc.start_tproc(start_src)
 
     def declare_readout(
         self, ch, length, freq=None, phase=0, sel='product', gen_ch=None,
@@ -1756,8 +1772,19 @@ class AcquireMixin:
             with tqdm(total=total_count, disable=hidereps) as pbar:
                 soc.start_readout(total_count, counter_addr=self.counter_addr,
                                        ch_list=list(self.ro_chs), reads_per_shot=self.reads_per_shot)
+                ### MODIFICATION ###
+                if start_src=='external':
+                    control_event.clear()
+                    trigger_thread = threading.Thread(target=trigger_start_pulse)
+                    trigger_thread.start()
+                ### MODIFICATION ###
                 while count<total_count:
                     new_data = obtain(soc.poll_data())
+                    ### MODIFICATION ###
+                    if start_src=='external':
+                        control_event.set()
+                        trigger_thread.join()
+                    ### MODIFICATION ###
                     for new_points, (d, s) in new_data:
                         for ii, nreads in enumerate(self.reads_per_shot):
                             #print(count, new_points, nreads, d[ii].shape, total_count)
@@ -1999,7 +2026,7 @@ class AcquireMixin:
 
             # run the assembly program
             # if start_src="external", you must pulse the trigger input once for every round
-            soc.start_tproc()
+            soc.start_tproc(start_src)
 
             count = 0
             with tqdm(total=total_count, disable=hidereps) as pbar:
@@ -2070,11 +2097,24 @@ class AcquireMixin:
 
             # run the assembly program
             # if start_src="external", you must pulse the trigger input once for every round
-            soc.start_tproc()
+            soc.start_tproc(start_src)
 
+            ### MODIFICATION ###
+            if start_src=='external':
+                control_event.clear()
+                trigger_thread = threading.Thread(target=trigger_start_pulse)
+                trigger_thread.start()
+            ### MODIFICATION ###
+            
             count = 0
             while count < total_count:
                 count = soc.get_tproc_counter(addr=self.counter_addr)
+                
+            ### MODIFICATION ###
+            if start_src=='external':
+                control_event.set()
+                trigger_thread.join()
+            ### MODIFICATION ###  
 
             for ii, (ch, ro) in enumerate(self.ro_chs.items()):
                 dec_buf[ii] += obtain(soc.get_decimated(ch=ch,
