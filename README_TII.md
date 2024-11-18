@@ -9,6 +9,6 @@ The firmware file should be: _'./base_MTS_14.bit'_. Which has the following feat
 - 1 Multiplex Readin (axis_pfb_readout_v4) at 2.4576 GSPS in ADC: 0_226.
 - Multi-Tile Synchronization between tiles 228 & 229.
 - SPI_0 output to control Bias Flux external Analog Front-end (+ driver 'TIDAC80508.py')
-- GPIO_0 output to control Multi-Board Synchronization from master to slaves (+ driver 'hello_GPIO.elf').
+- GPIO_0 output to control start pulse of tProc from master to slaves (modifications in qick library + driver 'hello_GPIO.elf').
 - LMK04828 configuration file for 'Nested Zero-Delay Dual-Loop' mode using external CLKin0 as reference.
 - HMC7044 configuration file to distribute clocks to LMKs.
