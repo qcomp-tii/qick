@@ -896,6 +896,7 @@ class QickProgram(AbsQickProgram):
                     t_ch = int(ts)
                 elif t < ts:
                     logger.warning("pulse time %d appears to conflict with previous pulse ending at %f?"%(t, ts))
+                    t_ch = int(t)
                 else:
                     t_ch = int(t)
                 # convert from generator clock to tProc clock
