@@ -1,6 +1,6 @@
 # Software for custom Qick firmware with tProc_v1
 
-This document provides a description of the hardware, firmware and software require to use multiple boards to control qubits using Qick and tProc_v1.
+This document provides a description of the hardware, firmware and software required to use multiple boards to control qubits using Qick and tProc_v1.
 
 The firmware file should be: _'./base_MTS_14.bit'_. Which has the following features:
 
