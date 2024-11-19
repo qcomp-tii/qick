@@ -944,9 +944,10 @@ class QickSoc(Overlay, QickConfig):
             if src=='internal':
                 self.tproc.tproc_cfg &= ~(1 << 10)
             elif src=='external':
+                self.tproc.reset()
                 self.tproc.tproc_cfg |=  (1 << 10)
 
-    def start_tproc(self, src):
+    def start_tproc(self):
         """
         Start the tProc.
         """
@@ -954,10 +955,7 @@ class QickSoc(Overlay, QickConfig):
             self.tproc.start()
         elif self.TPROC_VERSION == 2:
             self.tproc.stop()
-            if src=='internal':
-                self.tproc.start()
-            elif src=='external':
-                self.tproc.reset()
+            self.tproc.start()
 
     def stop_tproc(self, lazy=False):
         """

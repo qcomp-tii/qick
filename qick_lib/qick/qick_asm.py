@@ -1098,7 +1098,7 @@ class AbsQickProgram(ABC):
         soc.start_src(start_src)
         # run the assembly program
         # if start_src="external", it won't actually start until it sees a pulse
-        soc.start_tproc(start_src)
+        soc.start_tproc()
 
     def declare_readout(
         self, ch, length, freq=None, phase=0, sel='product', gen_ch=None,
@@ -2026,7 +2026,7 @@ class AcquireMixin:
 
             # run the assembly program
             # if start_src="external", you must pulse the trigger input once for every round
-            soc.start_tproc(start_src)
+            soc.start_tproc()
 
             count = 0
             with tqdm(total=total_count, disable=hidereps) as pbar:
@@ -2097,7 +2097,7 @@ class AcquireMixin:
 
             # run the assembly program
             # if start_src="external", you must pulse the trigger input once for every round
-            soc.start_tproc(start_src)
+            soc.start_tproc()
 
             ### MODIFICATION ###
             if start_src=='external':

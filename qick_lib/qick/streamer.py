@@ -116,7 +116,7 @@ class DataStreamer():
                 # if the tproc is configured for internal start, this will start the program
                 # for external start, the program will not start until a start pulse is received
                 ### MODIFICATION ###
-                self.soc.start_tproc(src='external')
+                self.soc.start_tproc()
                 ### MODIFICATION ###
 
                 # Keep streaming data until you get all of it
