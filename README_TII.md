@@ -1,6 +1,6 @@
 # Software for custom Qick firmware with tProc_v2
 
-This document provides a description of the hardware, firmware and software required to use multiple boards to control qubits using Qick and tProc_v1.
+This document provides a description of the hardware, firmware and software required to use multiple boards to control qubits using Qick and tProc_v2.
 
 The firmware file should be: _'./216_tProc_v8.bit'_. Which has the following features:
 
