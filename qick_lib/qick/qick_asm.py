@@ -1773,7 +1773,7 @@ class AcquireMixin:
                 soc.start_readout(total_count, counter_addr=self.counter_addr,
                                        ch_list=list(self.ro_chs), reads_per_shot=self.reads_per_shot)
                 ### MODIFICATION ###
-                if start_src=='external':
+                if start_src=='external':                    
                     control_event.clear()
                     trigger_thread = threading.Thread(target=trigger_start_pulse)
                     trigger_thread.start()
