@@ -849,7 +849,8 @@ class QickConfig():
             else:
                 # no collision, but we must check if either tone is in the overlap region of the other tone's channel
                 if np.abs(cfg2['f_folded'] - cfg1['pfb_center']) < rocfg['f_dds']/2:
-                    logger.warning("The readout at %.3f MHz may see some crosstalk from the tone at %.3f MHz." % (cfg1['f_rounded'], cfg2['f_rounded']))
+                    # logger.warning("The readout at %.3f MHz may see some crosstalk from the tone at %.3f MHz." % (cfg1['f_rounded'], cfg2['f_rounded']))
+                    pass
                     #source = cfg2
                     #victim = cfg1
                     #message = []
@@ -860,7 +861,8 @@ class QickConfig():
                     #message.append("The readout at %s MHz may see some crosstalk from the tone at %s MHz." % (victim['rounded'], source['rounded']))
                     #logger.warning('\n'.join(message))
                 if np.abs(cfg1['f_folded'] - cfg2['pfb_center']) < rocfg['f_dds']/2:
-                    logger.warning("The readout at %.3f MHz may see some crosstalk from the tone at %.3f MHz." % (cfg2['f_rounded'], cfg1['f_rounded']))
+                    # logger.warning("The readout at %.3f MHz may see some crosstalk from the tone at %.3f MHz." % (cfg2['f_rounded'], cfg1['f_rounded']))
+                    pass
 
     def get_maxv(self, gen_ch):
         """Convenience method for looking up a generator's maximum allowed envelope value.
