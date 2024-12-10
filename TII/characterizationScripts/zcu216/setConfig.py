@@ -102,10 +102,10 @@ channel_cfg = { "q6_flux_ch"    : RF_FLUX[0],
                 "lag"          : LAG,  # ns
 }
 
-flux_cfg = {    "q6_sweetspot": 0.12, # update
-                "q7_sweetspot": 0.14, # update
-                "q8_sweetspot": 0.26, # update
-                "q9_sweetspot": 0.24, # update
+flux_cfg = {    "q6_sweetspot": -0.156, # update
+                "q7_sweetspot": -0.187, # update
+                "q8_sweetspot": -0.2, # update
+                "q9_sweetspot": -0.22, # update
             
                 "q6_flux_pulse_start": 0,            # [ns]
                 "q6_flux_pulse_gain": 0.92,           # 0 to 1
@@ -163,13 +163,13 @@ drive_cfg={
           }                       
 
 readout_cfg={   "ro_pulse_start": 0,       # [ns]
-#                "ro_pulse_gain" : [0.24, 0.45, 0.24, 0.6],
-                "ro_pulse_gain" : [0.9, 0.9, 0.9, 0.9], #High power
+                "ro_pulse_gain" : [0.07, 0.017, 0.06, 0.04],  # Low power
+#                "ro_pulse_gain" : [0.9, 0.9, 0.9, 0.9], #High power
                 "ro_pulse_length": 3500,   # [ns]
                 "ro_pulse_shape": "const", # rectangular
-                "ro_pulse_frequency"    : [7490.8, 7551.0, 7581.39, 7439.64],
-                "freq_original"         : [7490.8, 7551.0, 7581.39, 7439.64],
-                "acquisition_frequency" : [7490.8, 7551.0, 7581.39, 7439.64],
+                "ro_pulse_frequency"    : [7491.732, 7552.237, 7582.338, 7436.382],
+                "freq_original"         : [7491.732, 7552.237, 7582.338, 7436.382],
+                "acquisition_frequency" : [7491.732, 7552.237, 7582.338, 7436.382],
                 "acquisition_length": 3000,      # [ns]
                 "delay_before_acquisition": TOF, # missing lags[ns]
                 "reps": 2000,                     # Fixed
